@@ -10,20 +10,21 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="全局事件总线 全局事件总线它也是组件通信的一种方式，可以用于实现任意组件间通信。 安装全局事件总线在main.js中： 1234567891011121314import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x27;Vue.config.productionTip &#x3D; falsenew Vue(&amp;#123;  el: &amp;">
+  <meta name="description" content="全局事件总线它也是组件通信的一种方式，可以用于实现任意组件间通信。 安装全局事件总线在main.js中： 1234567891011121314import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x27;Vue.config.productionTip &#x3D; falsenew Vue(&amp;#123;  el: &amp;#x27;#a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 全局事件总线 $bus">
 <meta property="og:url" content="https://chensjcanm.github.io/blog-pages/2022/12/07/%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF$bus/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="全局事件总线 全局事件总线它也是组件通信的一种方式，可以用于实现任意组件间通信。 安装全局事件总线在main.js中： 1234567891011121314import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x27;Vue.config.productionTip &#x3D; falsenew Vue(&amp;#123;  el: &amp;">
+<meta property="og:description" content="全局事件总线它也是组件通信的一种方式，可以用于实现任意组件间通信。 安装全局事件总线在main.js中： 1234567891011121314import Vue from &amp;#x27;vue&amp;#x27;import App from &amp;#x27;.&#x2F;App.vue&amp;#x27;Vue.config.productionTip &#x3D; falsenew Vue(&amp;#123;  el: &amp;#x27;#a">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/8ee6b9f366d4486b880adbec1af03c10.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/3b2cc4f027964fc3b788d474ba96fb5e.png#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/0e8573999e0644549076ed511646a0c1.jpeg#pic_center">
 <meta property="article:published_time" content="2022-12-07T07:44:32.000Z">
-<meta property="article:modified_time" content="2022-12-09T14:06:05.355Z">
+<meta property="article:modified_time" content="2023-01-18T12:38:11.685Z">
 <meta property="article:author" content="Chen">
-<meta property="article:tag" content="事件总线">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="组件通信">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/8ee6b9f366d4486b880adbec1af03c10.png#pic_center">
   
@@ -247,7 +248,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">482字</span>
+      <span class="post-count">476字</span>
     </span>
   </span>
 
@@ -267,8 +268,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>全局事件总线</p>
-<h1 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h1><p><em>它也是组件通信的一种方式，可以用于实现任意组件间通信。</em></p>
+    <h1 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h1><p><em>它也是组件通信的一种方式，可以用于实现任意组件间通信。</em></p>
 <h1 id="安装全局事件总线"><a href="#安装全局事件总线" class="headerlink" title="安装全局事件总线"></a>安装全局事件总线</h1><p>在main.js中：</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&#x27;./App.vue&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">  <span class="comment">//安装全局事件总线</span></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="variable language_">this</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -348,7 +348,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">事件总线</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件通信</a>
         		</li>
       		
 		</ul>
@@ -591,15 +595,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">事件总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Array</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">组件通信</a>
               </li>
             
             <div class="clearfix"></div>
